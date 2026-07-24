@@ -298,9 +298,6 @@ function WaxSeal({ breaking, onClick }: { breaking: boolean; onClick: () => void
   );
 }
 
-import { weddingConfig as _wc } from "@/lib/wedding-config"; // no-op guard
-void _wc;
-
 function HeroParticles() {
   const particles = Array.from({ length: 26 });
   return (
