@@ -50,7 +50,7 @@ export function BackgroundLayers() {
 }
 
 function Particles() {
-  const particles = Array.from({ length: 22 });
+  const particles = Array.from({ length: 34 });
   return (
     <div className="absolute inset-0">
       {particles.map((_, i) => {
