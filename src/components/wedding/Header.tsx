@@ -87,11 +87,15 @@ export function Header() {
       transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-[rgba(250,247,242,0.78)] border-b border-[rgba(212,180,131,0.28)] shadow-[0_1px_24px_-12px_rgba(47,43,40,0.25)]"
+          ? "backdrop-blur-2xl bg-[rgba(250,247,242,0.72)] border-b border-[rgba(212,180,131,0.32)] shadow-[0_8px_32px_-16px_rgba(47,43,40,0.22)]"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-4 md:px-10 md:py-5">
+      <div
+        className={`mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 md:px-10 transition-[padding] duration-500 ease-out ${
+          scrolled ? "py-2 md:py-2.5" : "py-4 md:py-5"
+        }`}
+      >
         <div className="flex items-center">{Monogram}</div>
 
         <nav className="hidden md:flex items-center justify-center gap-8 lg:gap-10">
@@ -101,24 +105,27 @@ export function Header() {
               <a
                 key={n.href}
                 href={n.href}
-                className="group relative text-eyebrow transition-colors duration-300 hover:text-[color:var(--gold)]"
+                className="group relative text-eyebrow transition-colors duration-300 hover:text-[color:var(--gold)] pb-2"
                 style={isActive ? { color: "var(--gold)" } : undefined}
               >
                 {n.label}
                 <span
-                  className={`pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-2 flex items-center gap-1 transition-all duration-500 ${
+                  className={`pointer-events-none absolute left-1/2 -translate-x-1/2 top-full flex items-center gap-1 transition-all duration-500 ${
                     isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                   }`}
                 >
                   <span
                     className={`block h-px bg-[color:var(--gold)] transition-all duration-500 ${
-                      isActive ? "w-5" : "w-0 group-hover:w-5"
+                      isActive ? "w-6" : "w-0 group-hover:w-6"
                     }`}
                   />
-                  <span className="block h-[3px] w-[3px] rotate-45 bg-[color:var(--gold)]" />
+                  <span
+                    className="block h-[4px] w-[4px] rotate-45 bg-[color:var(--gold)]"
+                    style={{ boxShadow: isActive ? "0 0 8px rgba(201,165,92,0.6)" : undefined }}
+                  />
                   <span
                     className={`block h-px bg-[color:var(--gold)] transition-all duration-500 ${
-                      isActive ? "w-5" : "w-0 group-hover:w-5"
+                      isActive ? "w-6" : "w-0 group-hover:w-6"
                     }`}
                   />
                 </span>
