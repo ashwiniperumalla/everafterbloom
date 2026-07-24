@@ -210,3 +210,7 @@
   50%  { transform: translate3d(3%, 2%, 0) rotate(2deg); opacity: 0.75; }
   100% { transform: translate3d(-4%, -2%, 0) rotate(0deg); opacity: 0.55; }
 }
+
+html {
+  scroll-behavior: smooth;
+}
