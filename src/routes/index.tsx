@@ -1,24 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { BackgroundLayers } from "@/components/wedding/BackgroundLayers";
+import { Header } from "@/components/wedding/Header";
+import { OpeningExperience } from "@/components/wedding/OpeningExperience";
+import { Hero } from "@/components/wedding/Hero";
+import {
+  StorySection,
+  CelebrationSection,
+  GallerySection,
+  BlessingsSection,
+  ContactSection,
+} from "@/components/wedding/Sections";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [showOpening, setShowOpening] = useState(true);
+
+  useEffect(() => {
+    if (showOpening) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showOpening]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="relative min-h-screen text-[color:var(--charcoal)]">
+      <BackgroundLayers />
+      <AnimatePresence>
+        {showOpening && (
+          <OpeningExperience onEnter={() => setShowOpening(false)} />
+        )}
+      </AnimatePresence>
+
+      <Header />
+      <main>
+        <Hero />
+        <StorySection />
+        <CelebrationSection />
+        <GallerySection />
+        <BlessingsSection />
+        <ContactSection />
+      </main>
     </div>
   );
 }
