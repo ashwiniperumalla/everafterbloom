@@ -1,8 +1,23 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Heart, Sparkles, Music2, MapPin, Mail, Phone } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { PrimaryButton, SecondaryButton } from "./Hero";
 import { weddingConfig } from "@/lib/wedding-config";
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.05 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export function StorySection() {
   const chapters = [
@@ -39,10 +54,10 @@ export function StorySection() {
           {chapters.map((c, i) => (
             <motion.div
               key={c.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
               className={`grid gap-8 md:grid-cols-12 md:gap-12 ${
                 i % 2 ? "md:[&>*:first-child]:order-2" : ""
               }`}
@@ -100,16 +115,26 @@ export function CelebrationSection() {
           subtitle="A gathering of the people we love, held close through every ritual and every dance."
         />
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mt-16 grid gap-8 md:grid-cols-3"
+        >
           {events.map((e, i) => (
             <motion.article
               key={e.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: i * 0.12, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative flex flex-col rounded-3xl border border-[rgba(212,180,131,0.3)] bg-[rgba(255,253,248,0.75)] backdrop-blur-sm p-8 md:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-[0_40px_80px_-40px_rgba(47,43,40,0.25)]"
+              variants={itemVariants}
+              className="group relative flex flex-col rounded-3xl border border-[rgba(212,180,131,0.3)] bg-[rgba(255,253,248,0.75)] backdrop-blur-sm p-8 md:p-10 transition-all duration-[400ms] ease-out hover:-translate-y-1.5 hover:border-[color:var(--gold)] hover:bg-[rgba(255,253,248,0.92)] hover:shadow-[0_30px_60px_-30px_rgba(201,165,92,0.4),0_0_0_1px_rgba(201,165,92,0.25)]"
             >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  boxShadow: "inset 0 0 40px rgba(201,165,92,0.12)",
+                }}
+              />
               <span className="grid h-14 w-14 place-items-center rounded-full bg-[color:var(--champagne-soft)] text-[color:var(--charcoal)]">
                 <e.icon className="h-5 w-5" strokeWidth={1.3} />
               </span>
@@ -122,7 +147,7 @@ export function CelebrationSection() {
               </p>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -155,15 +180,34 @@ export function GallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: i * 0.06, duration: 0.9 }}
-              className={`group relative overflow-hidden rounded-2xl border border-[rgba(212,180,131,0.25)] ${t.cls}`}
-              style={{ background: t.tone }}
+              className={`group relative overflow-hidden rounded-2xl border border-[rgba(212,180,131,0.5)] shadow-[0_18px_40px_-24px_rgba(47,43,40,0.35)] transition-all duration-[500ms] ease-out hover:-translate-y-1 hover:border-[color:var(--gold)] hover:shadow-[0_36px_70px_-28px_rgba(201,165,92,0.5)] ${t.cls}`}
+              style={{ background: `${t.tone}, #FAF7F2` }}
             >
-              <div className="absolute inset-0 grid place-items-center opacity-40 transition-opacity duration-500 group-hover:opacity-70">
+              {/* Warm ivory wash */}
+              <div
+                aria-hidden
+                className="absolute inset-0 transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+                style={{
+                  background:
+                    "radial-gradient(120% 90% at 30% 20%, rgba(255,253,248,0.55), transparent 60%), " + t.tone,
+                }}
+              />
+              {/* Subtle floral texture */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.18] mix-blend-multiply transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+                style={{
+                  backgroundImage:
+                    "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><g fill='none' stroke='%23C9A55C' stroke-width='0.7' opacity='0.55'><circle cx='60' cy='60' r='22'/><circle cx='60' cy='60' r='10'/><path d='M60 20 Q70 45 60 60 Q50 45 60 20 Z'/><path d='M60 100 Q70 75 60 60 Q50 75 60 100 Z'/><path d='M20 60 Q45 70 60 60 Q45 50 20 60 Z'/><path d='M100 60 Q75 70 60 60 Q75 50 100 60 Z'/><circle cx='180' cy='170' r='16'/><path d='M180 140 Q188 158 180 170 Q172 158 180 140 Z'/><path d='M180 200 Q188 182 180 170 Q172 182 180 200 Z'/></g></svg>\")",
+                  backgroundSize: "220px",
+                }}
+              />
+              <div className="relative z-10 grid h-full w-full place-items-center opacity-40 transition-opacity duration-500 group-hover:opacity-75">
                 <span className="font-script text-3xl text-[color:var(--charcoal)]">
                   {weddingConfig.groomName[0]} &amp; {weddingConfig.brideName[0]}
                 </span>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(47,43,40,0.15)] to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(47,43,40,0.15)] to-transparent" />
             </motion.div>
           ))}
         </div>
@@ -212,15 +256,18 @@ export function BlessingsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: i * 0.12, duration: 0.9 }}
-              className="relative rounded-3xl border border-[rgba(212,180,131,0.3)] bg-[rgba(255,253,248,0.8)] p-8 md:p-10"
+              className="group relative rounded-3xl border border-[rgba(212,180,131,0.3)] bg-[rgba(255,253,248,0.8)] p-8 md:p-10 transition-all duration-[400ms] ease-out hover:-translate-y-1.5 hover:border-[color:var(--gold)] hover:shadow-[0_30px_60px_-30px_rgba(201,165,92,0.4)]"
             >
-              <span className="absolute -top-4 left-8 font-serif text-6xl text-[color:var(--champagne)] leading-none">
+              <span className="absolute -top-6 left-6 font-serif text-8xl text-[color:var(--champagne)] leading-none drop-shadow-[0_2px_6px_rgba(201,165,92,0.25)]">
                 “
               </span>
-              <p className="font-serif italic text-lg leading-relaxed text-[color:var(--charcoal)]">
+              <p className="relative font-serif italic text-lg leading-relaxed text-[color:var(--charcoal)]">
                 {n.body}
               </p>
               <footer className="mt-6 text-eyebrow">— {n.from}</footer>
+              <span className="absolute -bottom-10 right-6 font-serif text-8xl text-[color:var(--champagne)] leading-none opacity-60">
+                ”
+              </span>
             </motion.blockquote>
           ))}
         </div>
@@ -246,7 +293,7 @@ export function ContactSection() {
         </div>
 
         <div className="mt-14 flex flex-wrap justify-center gap-4">
-          <PrimaryButton href="#home">RSVP with Joy</PrimaryButton>
+          <PrimaryButton href="#home">Celebrate With Us</PrimaryButton>
           <SecondaryButton href="#story">Read Our Story</SecondaryButton>
         </div>
 
