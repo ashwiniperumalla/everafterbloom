@@ -105,24 +105,27 @@ export function Header() {
               <a
                 key={n.href}
                 href={n.href}
-                className="group relative text-eyebrow transition-colors duration-300 hover:text-[color:var(--gold)]"
+                className="group relative text-eyebrow transition-colors duration-300 hover:text-[color:var(--gold)] pb-2"
                 style={isActive ? { color: "var(--gold)" } : undefined}
               >
                 {n.label}
                 <span
-                  className={`pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-2 flex items-center gap-1 transition-all duration-500 ${
+                  className={`pointer-events-none absolute left-1/2 -translate-x-1/2 top-full flex items-center gap-1 transition-all duration-500 ${
                     isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                   }`}
                 >
                   <span
                     className={`block h-px bg-[color:var(--gold)] transition-all duration-500 ${
-                      isActive ? "w-5" : "w-0 group-hover:w-5"
+                      isActive ? "w-6" : "w-0 group-hover:w-6"
                     }`}
                   />
-                  <span className="block h-[3px] w-[3px] rotate-45 bg-[color:var(--gold)]" />
+                  <span
+                    className="block h-[4px] w-[4px] rotate-45 bg-[color:var(--gold)]"
+                    style={{ boxShadow: isActive ? "0 0 8px rgba(201,165,92,0.6)" : undefined }}
+                  />
                   <span
                     className={`block h-px bg-[color:var(--gold)] transition-all duration-500 ${
-                      isActive ? "w-5" : "w-0 group-hover:w-5"
+                      isActive ? "w-6" : "w-0 group-hover:w-6"
                     }`}
                   />
                 </span>
