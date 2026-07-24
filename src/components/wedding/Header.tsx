@@ -87,11 +87,15 @@ export function Header() {
       transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-[rgba(250,247,242,0.78)] border-b border-[rgba(212,180,131,0.28)] shadow-[0_1px_24px_-12px_rgba(47,43,40,0.25)]"
+          ? "backdrop-blur-2xl bg-[rgba(250,247,242,0.72)] border-b border-[rgba(212,180,131,0.32)] shadow-[0_8px_32px_-16px_rgba(47,43,40,0.22)]"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-4 md:px-10 md:py-5">
+      <div
+        className={`mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 md:px-10 transition-[padding] duration-500 ease-out ${
+          scrolled ? "py-2 md:py-2.5" : "py-4 md:py-5"
+        }`}
+      >
         <div className="flex items-center">{Monogram}</div>
 
         <nav className="hidden md:flex items-center justify-center gap-8 lg:gap-10">
