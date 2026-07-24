@@ -4,20 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -59,29 +45,49 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-cream: var(--cream);
+  --color-champagne: var(--champagne);
+  --color-champagne-soft: var(--champagne-soft);
+  --color-gold: var(--gold);
+  --color-sage: var(--sage);
+  --color-charcoal: var(--charcoal);
+  --color-warm-gray: var(--warm-gray);
+  --font-serif: "Cormorant Garamond", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-sans: "Poppins", sans-serif;
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  /* Brand palette */
+  --cream: #FAF7F2;
+  --cream-soft: #F4EFE7;
+  --champagne: #D4B483;
+  --champagne-soft: #E7D7B5;
+  --gold: #C9A55C;
+  --sage: #A8B59A;
+  --charcoal: #2F2B28;
+  --warm-gray: #6B655E;
+
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --card: #FFFDF8;
+  --card-foreground: var(--charcoal);
+  --popover: #FFFDF8;
+  --popover-foreground: var(--charcoal);
+  --primary: var(--champagne);
+  --primary-foreground: #FFFDF8;
+  --secondary: var(--cream-soft);
+  --secondary-foreground: var(--charcoal);
+  --muted: var(--cream-soft);
+  --muted-foreground: var(--warm-gray);
+  --accent: var(--champagne-soft);
+  --accent-foreground: var(--charcoal);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --destructive-foreground: #FFFDF8;
+  --border: rgba(47, 43, 40, 0.12);
+  --input: rgba(47, 43, 40, 0.12);
+  --ring: var(--champagne);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +146,54 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
   }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility font-serif { font-family: var(--font-serif); }
+@utility font-script { font-family: var(--font-script); }
+@utility font-sans { font-family: var(--font-sans); }
+
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+}
+
+@utility divider-ornament {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--champagne);
+  &::before, &::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--champagne), transparent);
+  }
+}
+
+@keyframes floatParticle {
+  0%   { transform: translate3d(0,0,0); opacity: 0; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.6; }
+  100% { transform: translate3d(20px,-120vh,0); opacity: 0; }
+}
+
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,180,131,0.35); }
+  50%      { transform: scale(1.03); box-shadow: 0 0 0 18px rgba(212,180,131,0); }
 }
