@@ -369,7 +369,7 @@ export function PrimaryButton({
     <Cmp
       href={href}
       onClick={onClick}
-      className="inline-flex items-center justify-center rounded-full bg-[color:var(--champagne)] px-8 py-3.5 text-[0.72rem] uppercase tracking-[0.32em] text-[color:var(--cream)] shadow-[0_18px_40px_-18px_rgba(201,165,92,0.7)] transition-all duration-500 hover:-translate-y-[3px] hover:bg-[color:var(--gold)]"
+      className="inline-flex items-center justify-center rounded-full bg-[color:var(--champagne)] px-8 py-3.5 text-[0.72rem] uppercase tracking-[0.32em] text-[color:var(--cream)] shadow-[0_10px_28px_-14px_rgba(201,165,92,0.55)] transition-all duration-[350ms] ease-out hover:-translate-y-[3px] hover:bg-[color:var(--gold)] hover:shadow-[0_22px_44px_-18px_rgba(201,165,92,0.75),0_0_0_6px_rgba(201,165,92,0.12)]"
     >
       {children}
     </Cmp>
@@ -390,7 +390,7 @@ export function SecondaryButton({
     <Cmp
       href={href}
       onClick={onClick}
-      className="inline-flex items-center justify-center rounded-full border border-[rgba(212,180,131,0.55)] bg-[rgba(255,253,248,0.6)] px-8 py-3.5 text-[0.72rem] uppercase tracking-[0.32em] text-[color:var(--charcoal)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-[3px] hover:border-[color:var(--gold)]"
+      className="inline-flex items-center justify-center rounded-full border border-[rgba(212,180,131,0.55)] bg-[rgba(255,253,248,0.6)] px-8 py-3.5 text-[0.72rem] uppercase tracking-[0.32em] text-[color:var(--charcoal)] backdrop-blur-sm transition-all duration-[350ms] ease-out hover:-translate-y-[3px] hover:border-[color:var(--gold)] hover:bg-[rgba(255,253,248,0.9)] hover:shadow-[0_18px_38px_-18px_rgba(201,165,92,0.5),0_0_0_5px_rgba(201,165,92,0.1)]"
     >
       {children}
     </Cmp>
