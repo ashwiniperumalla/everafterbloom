@@ -12,6 +12,7 @@ import {
   BlessingsSection,
   ContactSection,
 } from "@/components/wedding/Sections";
+import { LetterReveal } from "@/components/wedding/LetterReveal";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -52,6 +53,7 @@ function Index() {
         <CelebrationSection />
         <GallerySection />
         <BlessingsSection />
+        <LetterReveal />
         <ContactSection />
       </motion.main>
     </div>
