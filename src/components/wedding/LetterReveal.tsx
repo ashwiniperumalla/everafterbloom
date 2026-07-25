@@ -1,16 +1,28 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
 import { weddingConfig } from "@/lib/wedding-config";
 
+const paperGrain =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.86  0 0 0 0 0.76  0 0 0 0 0.58  0 0 0 0.13 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>\")";
+
+const envelopeGrain =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.82  0 0 0 0 0.71  0 0 0 0 0.5  0 0 0 0.2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")";
+
 export function LetterReveal() {
   const [opened, setOpened] = useState(false);
+  const [showClosing, setShowClosing] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (!opened) return;
+    const t = setTimeout(() => setShowClosing(true), 5000);
+    return () => clearTimeout(t);
+  }, [opened]);
 
   const handleOpen = () => {
     if (opened) return;
     setOpened(true);
-    // Soft page-turn sound (base64 subtle paper rustle) — only after user click
     try {
       if (!audioRef.current) {
         audioRef.current = new Audio(
@@ -24,7 +36,6 @@ export function LetterReveal() {
 
   return (
     <section id="letter" className="relative py-28 md:py-40 overflow-hidden">
-      {/* Corner botanicals */}
       <CornerBotanical className="absolute top-8 left-6 w-40 md:w-56 opacity-40 rotate-[-8deg]" />
       <CornerBotanical className="absolute top-8 right-6 w-40 md:w-56 opacity-40 scale-x-[-1] rotate-[8deg]" />
       <CornerBotanical className="absolute bottom-8 left-6 w-40 md:w-56 opacity-40 scale-y-[-1] rotate-[8deg]" />
@@ -37,132 +48,169 @@ export function LetterReveal() {
           subtitle="Press the seal to open our letter."
         />
 
-        <div className="relative mt-20 flex items-center justify-center min-h-[560px] md:min-h-[640px]">
-          {/* Blur backdrop when opened */}
+        <div className="relative mt-20 flex items-center justify-center min-h-[620px] md:min-h-[720px]">
           <motion.div
             aria-hidden
             initial={false}
             animate={{ opacity: opened ? 1 : 0 }}
-            transition={{ duration: 0.9 }}
-            className="pointer-events-none absolute inset-0 backdrop-blur-[3px]"
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute -inset-x-20 -inset-y-16"
             style={{
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
               background:
-                "radial-gradient(60% 50% at 50% 50%, rgba(250,247,242,0.6), rgba(250,247,242,0.1) 70%, transparent)",
+                "radial-gradient(65% 55% at 50% 50%, rgba(47,43,40,0.18), rgba(47,43,40,0.28) 70%, rgba(47,43,40,0.35))",
             }}
           />
 
-          {/* Envelope */}
           <motion.div
             initial={{ y: 0 }}
             animate={{ y: opened ? -20 : [0, -8, 0] }}
             transition={
               opened
-                ? { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+                ? { duration: 1.1, ease: [0.22, 1, 0.36, 1] }
                 : { duration: 5, repeat: Infinity, ease: "easeInOut" }
             }
             className="relative w-[min(92vw,520px)] aspect-[3/2]"
-            style={{ perspective: 1400 }}
+            style={{ perspective: 1600 }}
           >
-            {/* Envelope back / body */}
             <div
               className="absolute inset-0 rounded-md"
               style={{
-                background:
-                  "linear-gradient(160deg, #F6EEDF 0%, #EFE3CB 55%, #E7D5AE 100%)",
-                boxShadow:
-                  "0 40px 80px -30px rgba(120,90,40,0.35), inset 0 0 0 1px rgba(201,165,92,0.55), inset 0 0 60px rgba(201,165,92,0.12)",
-                backgroundImage:
-                  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.75  0 0 0 0 0.55  0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\"), linear-gradient(160deg, #F6EEDF 0%, #EFE3CB 55%, #E7D5AE 100%)",
+                backgroundImage: `${envelopeGrain}, linear-gradient(160deg, #F6EEDF 0%, #EFE3CB 55%, #E7D5AE 100%)`,
                 backgroundBlendMode: "multiply, normal",
+                boxShadow:
+                  "0 50px 90px -32px rgba(90,60,20,0.42), 0 18px 30px -18px rgba(90,60,20,0.28), inset 0 0 0 1px rgba(201,165,92,0.7), inset 0 0 70px rgba(201,165,92,0.14)",
               }}
             />
-            {/* Inner gold border */}
-            <div className="absolute inset-3 rounded-sm border border-[color:var(--gold)]/50" />
+            <div className="pointer-events-none absolute inset-[6px] rounded-sm border border-[color:var(--gold)]/60" />
+            <div className="pointer-events-none absolute inset-[10px] rounded-sm border border-[color:var(--gold)]/25" />
 
-            {/* Letter — slides up from envelope */}
             <AnimatePresence>
               {opened && (
                 <motion.div
                   key="letter"
-                  initial={{ y: 0, opacity: 0, scaleY: 0.35 }}
-                  animate={{ y: "-72%", opacity: 1, scaleY: 1 }}
-                  transition={{
-                    y: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.4 },
-                    opacity: { duration: 0.6, delay: 0.4 },
-                    scaleY: { duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.6 },
+                  initial={{ y: "0%", opacity: 0 }}
+                  animate={{
+                    y: ["0%", "-40%", "-40%", "-78%"],
+                    opacity: [0, 1, 1, 1],
                   }}
+                  transition={{
+                    delay: 1.5,
+                    duration: 3.4,
+                    times: [0, 0.35, 0.6, 1],
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="absolute inset-x-6 bottom-6 z-10"
                   style={{ transformOrigin: "bottom center" }}
-                  className="absolute inset-x-6 bottom-6 z-10 origin-bottom"
                 >
                   <motion.div
-                    animate={{ y: [0, -3, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                    className="relative rounded-sm p-8 md:p-12 text-center"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, #FFFDF8 0%, #FBF5EA 100%)",
-                      boxShadow:
-                        "0 30px 60px -20px rgba(80,60,30,0.35), inset 0 0 0 1px rgba(201,165,92,0.35)",
-                      backgroundImage:
-                        "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='p'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.82  0 0 0 0 0.65  0 0 0 0.12 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>\"), linear-gradient(180deg, #FFFDF8 0%, #FBF5EA 100%)",
-                      backgroundBlendMode: "multiply, normal",
-                    }}
+                    initial={{ scaleY: 0.55 }}
+                    animate={{ scaleY: 1 }}
+                    transition={{ delay: 4.6, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ transformOrigin: "top center" }}
                   >
-                    <div className="mx-auto flex flex-col items-center gap-3">
-                      <span className="divider-ornament" aria-hidden />
-                      <p className="text-eyebrow">A Letter From Us</p>
-                    </div>
+                    <motion.div
+                      animate={{ y: [0, -3, 0] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 5.6 }}
+                      className="relative rounded-lg p-8 md:p-12 text-center overflow-hidden"
+                      style={{
+                        backgroundImage: `${paperGrain}, linear-gradient(180deg, #FFFDF6 0%, #FBF4E5 100%)`,
+                        backgroundBlendMode: "multiply, normal",
+                        boxShadow:
+                          "0 40px 80px -22px rgba(80,55,20,0.42), 0 12px 24px -14px rgba(80,55,20,0.25), inset 0 0 0 1px rgba(201,165,92,0.45)",
+                      }}
+                    >
+                      <div className="pointer-events-none absolute inset-3 rounded-md border border-[color:var(--gold)]/35" />
 
-                    <h3 className="mt-6 font-serif text-2xl md:text-3xl text-[color:var(--charcoal)]">
-                      Dear Family &amp; Friends,
-                    </h3>
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 grid place-items-center select-none"
+                      >
+                        <span
+                          className="font-serif font-semibold tracking-[0.15em]"
+                          style={{
+                            fontSize: "clamp(9rem, 22vw, 15rem)",
+                            color: "transparent",
+                            background:
+                              "linear-gradient(180deg, rgba(201,165,92,0.14), rgba(201,165,92,0.05))",
+                            WebkitBackgroundClip: "text",
+                            backgroundClip: "text",
+                            textShadow:
+                              "0 1px 0 rgba(255,253,246,0.9), 0 -1px 0 rgba(120,90,40,0.06)",
+                          }}
+                        >
+                          A&amp;S
+                        </span>
+                      </div>
 
-                    <div className="mt-6 space-y-4 text-[color:var(--warm-gray)] font-light leading-[1.9] text-base md:text-lg max-w-xl mx-auto">
-                      <p>
-                        Thank you for being part of one of the most meaningful days of our lives.
-                      </p>
-                      <p>
-                        Your love, blessings, laughter and presence make this celebration truly unforgettable.
-                      </p>
-                      <p>
-                        As we begin this beautiful new chapter together, we carry your wishes in our hearts.
-                      </p>
-                    </div>
+                      <div className="relative">
+                        <p className="font-serif text-2xl md:text-3xl font-semibold tracking-[0.2em] text-[color:var(--gold)]">
+                          A&amp;S
+                        </p>
+                        <div className="mt-3 flex items-center justify-center">
+                          <BotanicalDivider />
+                        </div>
 
-                    <div className="mt-8">
-                      <p className="text-eyebrow">With Love,</p>
-                      <p className="mt-3 font-script text-4xl md:text-5xl text-[color:var(--gold)]">
-                        {weddingConfig.groomName} &amp; {weddingConfig.brideName}
-                      </p>
-                    </div>
+                        <h3 className="mt-6 font-serif text-2xl md:text-3xl text-[color:var(--charcoal)]">
+                          Dear Family &amp; Friends,
+                        </h3>
+
+                        <div className="mt-6 space-y-5 text-[color:var(--warm-gray)] font-light leading-[2] text-base md:text-lg max-w-xl mx-auto">
+                          <p>Thank you for being part of one of the most meaningful days of our lives.</p>
+                          <p>Your love, blessings, and laughter make this celebration truly unforgettable.</p>
+                          <p>As we begin this beautiful new chapter, we carry your wishes in our hearts.</p>
+                        </div>
+
+                        <div className="mt-10">
+                          <p className="text-eyebrow">With Love,</p>
+                          <p className="mt-3 font-script text-4xl md:text-5xl text-[color:var(--gold)]">
+                            {weddingConfig.groomName} &amp; {weddingConfig.brideName}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
                   </motion.div>
+
+                  <AnimatePresence>
+                    {showClosing && (
+                      <motion.p
+                        key="closing"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+                        className="mt-8 text-center font-serif italic text-lg md:text-xl text-[color:var(--warm-gray)]"
+                      >
+                        &ldquo;Every forever begins with one beautiful promise.&rdquo;
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* Envelope flap (top triangle) */}
             <motion.div
               initial={false}
-              animate={{ rotateX: opened ? -180 : 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              animate={{ rotateX: opened ? -175 : 0 }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: opened ? 0.15 : 0 }}
               className="absolute inset-x-0 top-0 h-1/2 origin-top z-20"
               style={{ transformStyle: "preserve-3d" }}
             >
               <div
                 className="absolute inset-0"
                 style={{
-                  background:
-                    "linear-gradient(180deg, #F0E2C4 0%, #E4D0A6 100%)",
+                  backgroundImage: `${envelopeGrain}, linear-gradient(180deg, #F0E2C4 0%, #E4D0A6 100%)`,
+                  backgroundBlendMode: "multiply, normal",
                   clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-                  boxShadow: "inset 0 -1px 0 rgba(201,165,92,0.6)",
+                  boxShadow: "inset 0 -1px 0 rgba(201,165,92,0.7)",
                   backfaceVisibility: "hidden",
                 }}
               />
               <div
                 className="absolute inset-0"
                 style={{
-                  background:
-                    "linear-gradient(0deg, #F6EEDF 0%, #EFE3CB 100%)",
+                  backgroundImage: `${envelopeGrain}, linear-gradient(0deg, #F6EEDF 0%, #EFE3CB 100%)`,
+                  backgroundBlendMode: "multiply, normal",
                   clipPath: "polygon(0 0, 100% 0, 50% 100%)",
                   transform: "rotateX(180deg)",
                   backfaceVisibility: "hidden",
@@ -170,7 +218,6 @@ export function LetterReveal() {
               />
             </motion.div>
 
-            {/* Wax Seal */}
             <button
               type="button"
               onClick={handleOpen}
@@ -183,41 +230,65 @@ export function LetterReveal() {
                 initial={false}
                 animate={
                   opened
-                    ? { scale: [1, 1.15, 0.9, 1.4], opacity: [1, 1, 0.7, 0], rotate: [0, -3, 2, 0] }
-                    : { scale: [1, 1.04, 1] }
+                    ? {
+                        scale: [1, 0.94, 1.02, 1.08],
+                        opacity: [1, 1, 0.85, 0],
+                        rotate: [0, -1.5, 1.2, 0],
+                        y: [0, 1, -2, -6],
+                      }
+                    : { scale: [1, 1.03, 1] }
                 }
                 transition={
                   opened
-                    ? { duration: 1, ease: "easeOut" }
+                    ? { duration: 1.2, ease: [0.22, 1, 0.36, 1], times: [0, 0.2, 0.55, 1] }
                     : { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
                 }
-                className="relative grid h-24 w-24 md:h-28 md:w-28 place-items-center rounded-full font-serif text-2xl md:text-3xl font-semibold text-[#5a2a1a] cursor-pointer"
+                className="relative grid h-24 w-24 md:h-28 md:w-28 place-items-center rounded-full font-serif text-2xl md:text-3xl font-semibold cursor-pointer overflow-hidden"
                 style={{
                   background:
-                    "radial-gradient(circle at 32% 28%, #b8442f 0%, #8a2a1a 55%, #5a180d 100%)",
+                    "radial-gradient(circle at 32% 28%, #c04a34 0%, #8a2a1a 55%, #4d140a 100%)",
                   boxShadow:
-                    "0 12px 24px -8px rgba(90,20,10,0.6), inset 0 2px 6px rgba(255,220,200,0.35), inset 0 -6px 12px rgba(0,0,0,0.35)",
-                  textShadow: "0 1px 0 rgba(255,220,200,0.25), 0 -1px 1px rgba(0,0,0,0.4)",
+                    "0 14px 26px -8px rgba(90,20,10,0.6), inset 0 2px 6px rgba(255,220,200,0.4), inset 0 -8px 14px rgba(0,0,0,0.4)",
                 }}
               >
-                <span className="tracking-wider">A&amp;S</span>
-                {/* wax edge irregularity */}
+                <span
+                  className="relative tracking-wider z-10"
+                  style={{
+                    color: "#3a0d05",
+                    textShadow:
+                      "0 1px 0 rgba(255,220,200,0.55), 0 -1px 1px rgba(0,0,0,0.55), 0 0 10px rgba(0,0,0,0.25)",
+                  }}
+                >
+                  A&amp;S
+                </span>
+
+                <motion.span
+                  aria-hidden
+                  className="absolute -inset-2"
+                  style={{
+                    background:
+                      "linear-gradient(115deg, transparent 40%, rgba(255,235,210,0.35) 50%, transparent 60%)",
+                    mixBlendMode: "screen",
+                  }}
+                  animate={{ x: ["-60%", "60%"] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                />
+
                 <span
                   aria-hidden
                   className="absolute inset-0 rounded-full"
                   style={{
                     background:
-                      "radial-gradient(circle at 70% 75%, transparent 55%, rgba(0,0,0,0.25) 62%, transparent 68%)",
+                      "radial-gradient(circle at 70% 75%, transparent 55%, rgba(0,0,0,0.28) 62%, transparent 68%)",
                     mixBlendMode: "multiply",
                   }}
                 />
               </motion.span>
             </button>
 
-            {/* Golden particles when opened */}
             {opened && (
               <div className="pointer-events-none absolute inset-0 z-40 overflow-visible">
-                {Array.from({ length: 18 }).map((_, i) => (
+                {Array.from({ length: 20 }).map((_, i) => (
                   <motion.span
                     key={i}
                     initial={{
@@ -234,7 +305,7 @@ export function LetterReveal() {
                     }}
                     transition={{
                       duration: 4 + Math.random() * 3,
-                      delay: 0.6 + Math.random() * 1.2,
+                      delay: 0.8 + Math.random() * 1.4,
                       repeat: Infinity,
                       ease: "easeOut",
                     }}
@@ -263,6 +334,28 @@ export function LetterReveal() {
         </div>
       </div>
     </section>
+  );
+}
+
+function BotanicalDivider() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 140 16"
+      className="h-4 w-32"
+      fill="none"
+      stroke="#C9A55C"
+      strokeWidth="0.8"
+      strokeLinecap="round"
+    >
+      <path d="M2 8 H55" />
+      <path d="M138 8 H85" />
+      <circle cx="70" cy="8" r="2.2" fill="#C9A55C" stroke="none" />
+      <path d="M63 8 q3 -5 7 -5" />
+      <path d="M77 8 q-3 5 -7 5" />
+      <path d="M63 8 q3 5 7 5" opacity="0.6" />
+      <path d="M77 8 q-3 -5 -7 -5" opacity="0.6" />
+    </svg>
   );
 }
 
