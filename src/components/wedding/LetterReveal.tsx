@@ -60,17 +60,17 @@ export function LetterReveal() {
             aria-hidden
             initial={false}
             animate={{ opacity: opened ? 1 : 0 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             className="pointer-events-none absolute -inset-x-20 -inset-y-16"
             style={{
-              backdropFilter: "blur(6px)",
+              backdropFilter: "blur(4px)",
               background:
-                "radial-gradient(65% 55% at 50% 50%, rgba(47,43,40,0.16), rgba(47,43,40,0.26) 70%, rgba(47,43,40,0.34))",
+                "radial-gradient(65% 55% at 50% 50%, rgba(47,43,40,0.08), rgba(47,43,40,0.16) 70%, rgba(47,43,40,0.22))",
             }}
           />
 
           <div
-            className="relative w-[min(94vw,640px)] aspect-[3/2]"
+            className="relative w-[min(96vw,720px)] aspect-[3/2]"
             style={{ transformStyle: "preserve-3d" }}
           >
             {/* Envelope body — fixed, always visible */}
@@ -104,24 +104,24 @@ export function LetterReveal() {
               {opened && (
                 <motion.div
                   key="invitation"
-                  initial={{ z: 0, y: 0, opacity: 0, scale: 0.96 }}
-                  animate={{ z: 90, y: -18, opacity: 1, scale: 1.04 }}
-                  exit={{ z: 0, y: 0, opacity: 0, scale: 0.96 }}
-                  transition={{ delay: 0.9, duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-x-[6%] top-[10%] bottom-[10%] z-20"
+                  initial={{ z: 0, y: 0, opacity: 0, scale: 0.98 }}
+                  animate={{ z: 110, y: -26, opacity: 1, scale: 1.14 }}
+                  exit={{ z: 0, y: 0, opacity: 0, scale: 0.98 }}
+                  transition={{ delay: 1.0, duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-x-[4%] top-[8%] bottom-[8%] z-20"
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <div
-                    className="relative w-full h-full rounded-xl overflow-hidden"
+                    className="relative w-full h-full rounded-[10px] overflow-hidden"
                     style={{
                       backgroundImage: `${paperGrain}, linear-gradient(180deg, #FFFDF6 0%, #FBF4E5 100%)`,
                       backgroundBlendMode: "multiply, normal",
                       boxShadow:
-                        "0 55px 90px -30px rgba(60,40,15,0.55), 0 20px 40px -20px rgba(60,40,15,0.35), inset 0 0 0 1px rgba(201,165,92,0.55)",
+                        "0 40px 70px -28px rgba(60,40,15,0.42), 0 14px 30px -16px rgba(60,40,15,0.24), 0 0 40px -8px rgba(201,165,92,0.35), inset 0 0 0 1px rgba(201,165,92,0.5), inset 0 0 60px rgba(240,205,130,0.12)",
                     }}
                   >
-                    <div className="pointer-events-none absolute inset-3 rounded-lg border border-[color:var(--gold)]/40" />
-                    <div className="pointer-events-none absolute inset-4 rounded-md border border-[color:var(--gold)]/15" />
+                    <div className="pointer-events-none absolute inset-[14px] rounded-[6px] border border-[color:var(--gold)]/45" />
+                    <div className="pointer-events-none absolute inset-[20px] rounded-[4px] border border-[color:var(--gold)]/15" />
 
                     {/* Embossed watermark */}
                     <div
@@ -149,16 +149,16 @@ export function LetterReveal() {
                       <motion.p
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.8, duration: 0.9 }}
-                        className="font-serif text-xl md:text-2xl font-semibold tracking-[0.28em] text-[color:var(--gold)]"
+                        transition={{ delay: 2.0, duration: 0.9 }}
+                        className="font-serif text-xl md:text-2xl font-semibold tracking-[0.32em] text-[color:var(--gold)]"
                       >
                         A&amp;S
                       </motion.p>
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 2.0, duration: 0.9 }}
-                        className="mt-2 md:mt-3 flex items-center justify-center"
+                        transition={{ delay: 2.2, duration: 0.9 }}
+                        className="mt-3 md:mt-4 flex items-center justify-center"
                       >
                         <BotanicalDivider />
                       </motion.div>
@@ -166,8 +166,8 @@ export function LetterReveal() {
                       <motion.h3
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 2.2, duration: 0.9 }}
-                        className="mt-3 md:mt-4 font-serif text-lg md:text-2xl text-[color:var(--charcoal)]"
+                        transition={{ delay: 2.4, duration: 0.9 }}
+                        className="mt-4 md:mt-6 font-serif text-lg md:text-2xl text-[color:var(--charcoal)]"
                       >
                         Dear Family &amp; Friends,
                       </motion.h3>
@@ -175,8 +175,8 @@ export function LetterReveal() {
                       <motion.div
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 2.5, duration: 1 }}
-                        className="mt-3 md:mt-5 space-y-2 md:space-y-3 text-[color:var(--warm-gray)] font-light leading-[1.8] text-[0.78rem] md:text-base max-w-2xl"
+                        transition={{ delay: 2.7, duration: 1 }}
+                        className="mt-4 md:mt-6 space-y-3 md:space-y-4 text-[color:var(--warm-gray)] font-light leading-[1.9] text-[0.82rem] md:text-base max-w-2xl"
                       >
                         <p>
                           Thank you for celebrating one of the happiest moments of our lives.
@@ -192,11 +192,11 @@ export function LetterReveal() {
                       <motion.div
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 3.0, duration: 1 }}
-                        className="mt-4 md:mt-6"
+                        transition={{ delay: 3.2, duration: 1 }}
+                        className="mt-6 md:mt-8"
                       >
-                        <p className="text-eyebrow">With Love,</p>
-                        <p className="mt-1 md:mt-2 font-script text-3xl md:text-5xl text-[color:var(--gold)]">
+                        <p className="text-eyebrow text-[0.65rem] md:text-xs opacity-80">With Love,</p>
+                        <p className="mt-2 md:mt-3 font-script text-4xl md:text-6xl text-[color:var(--gold)] leading-[1.1]">
                           {weddingConfig.groomName} &amp; {weddingConfig.brideName}
                         </p>
                       </motion.div>
@@ -210,7 +210,7 @@ export function LetterReveal() {
             <motion.div
               initial={false}
               animate={{ rotateX: opened ? -172 : 0 }}
-              transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1], delay: opened ? 0.35 : 0.6 }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: opened ? 0.4 : 0.9 }}
               className="absolute inset-x-0 top-0 h-1/2 origin-top z-10"
               style={{ transformStyle: "preserve-3d" }}
             >
