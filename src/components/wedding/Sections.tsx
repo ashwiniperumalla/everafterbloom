@@ -1,5 +1,5 @@
 import { motion, type Variants } from "framer-motion";
-import { Heart, Sparkles, Music2, MapPin, Mail, Phone } from "lucide-react";
+import { Heart, Sparkles, Music2, MapPin, Mail, Phone, ScrollText, Flower2, Landmark } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { PrimaryButton, SecondaryButton } from "./Hero";
 import { weddingConfig } from "@/lib/wedding-config";
@@ -87,22 +87,34 @@ export function StorySection() {
 export function CelebrationSection() {
   const events = [
     {
+      icon: ScrollText,
+      title: "Marriage Registration",
+      time: "Date to be Announced",
+      body: "The formal beginning — vows witnessed and sealed in the presence of family.",
+    },
+    {
       icon: Sparkles,
-      title: "Mehendi & Sangeet",
-      time: "An evening of henna, music, and laughter",
-      body: "Soft candlelight, family songs, and the first quiet celebrations before the vows.",
+      title: "Reception Celebration",
+      time: "Immediately Following the Registration Ceremony",
+      body: "An evening of blessings, feasting and warm gold light with the ones we love.",
     },
     {
-      icon: Heart,
-      title: "The Wedding",
-      time: weddingConfig.weddingDate,
-      body: `A traditional ceremony marking a lifetime of togetherness in ${weddingConfig.city}, Telangana.`,
+      icon: Flower2,
+      title: "Bride's Reception",
+      time: "The Following Day",
+      body: "A softer, intimate gathering to welcome the bride into her new family.",
     },
     {
-      icon: Music2,
-      title: "The Reception",
-      time: weddingConfig.receptionTime,
-      body: "An intimate evening of feasting, blessings, and dancing under warm gold light.",
+      icon: MapPin,
+      title: "Location",
+      time: `${weddingConfig.city}, Telangana`,
+      body: "The celebrations unfold in the heart of Mahabubabad, surrounded by family.",
+    },
+    {
+      icon: Landmark,
+      title: "Venue",
+      time: "To Be Announced",
+      body: "Details of the venue will be shared closer to the celebration.",
     },
   ];
 
@@ -111,7 +123,7 @@ export function CelebrationSection() {
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <SectionHeading
           eyebrow="The Celebration"
-          title="Three days of quiet joy"
+          title="Celebration Timeline"
           subtitle="A gathering of the people we love, held close through every ritual and every dance."
         />
 
