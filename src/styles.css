@@ -213,4 +213,43 @@
 
 html {
   scroll-behavior: smooth;
+  /* Clear the fixed header when jumping to an anchor */
+  scroll-padding-top: 96px;
+}
+
+@layer base {
+  body {
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Consistent, calm focus ring across the site */
+  :focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--gold) 70%, transparent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Images inherit soft, editorial defaults */
+  img {
+    color: transparent; /* hide alt flash while loading */
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--champagne) 55%, transparent);
+    color: var(--charcoal);
+  }
+}
+
+/* Respect users who prefer reduced motion — keep it elegant, not lifeless */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
