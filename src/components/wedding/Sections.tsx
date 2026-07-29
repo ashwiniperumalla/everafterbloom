@@ -89,19 +89,19 @@ export function CelebrationSection() {
     {
       icon: ScrollText,
       title: "Marriage Registration",
-      time: "Date to be Announced",
+      time: "Thursday, 20 August 2026",
       body: "The formal beginning — vows witnessed and sealed in the presence of family.",
     },
     {
       icon: Sparkles,
       title: "Reception Celebration",
-      time: "Immediately Following the Registration Ceremony",
+      time: "Thursday, 20 August 2026 · Following the Marriage Registration",
       body: "An evening of blessings, feasting and warm gold light with the ones we love.",
     },
     {
       icon: Flower2,
       title: "Bride's Reception",
-      time: "The Following Day",
+      time: "Friday, 21 August 2026",
       body: "A softer, intimate gathering to welcome the bride into her new family.",
     },
     {
@@ -123,7 +123,7 @@ export function CelebrationSection() {
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <SectionHeading
           eyebrow="The Celebration"
-          title="Celebration Timeline"
+          title="Celebration"
           subtitle="A gathering of the people we love, held close through every ritual and every dance."
         />
 

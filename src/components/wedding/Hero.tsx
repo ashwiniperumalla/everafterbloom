@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, Sparkles, MapPin, Landmark } from "lucide-react";
 import corridor from "@/assets/floral-corridor.jpg";
 import { weddingConfig } from "@/lib/wedding-config";
 
@@ -20,14 +19,6 @@ export function Hero() {
     setBreaking(true);
     setTimeout(() => setRevealed(true), 1200);
   };
-
-  const info = [
-    { icon: Calendar, label: "Wedding Date", value: weddingConfig.weddingDate },
-    { icon: Clock, label: "Register Marriage", value: weddingConfig.marriageTime },
-    { icon: Sparkles, label: "Reception", value: weddingConfig.receptionTime },
-    { icon: MapPin, label: "Location", value: `${weddingConfig.city}, Telangana` },
-    { icon: Landmark, label: "Venue", value: weddingConfig.venueName },
-  ];
 
   return (
     <section id="home" className="relative">
@@ -203,38 +194,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Info card below the hero stage */}
-      <div className="relative z-10 mx-auto -mt-20 max-w-3xl px-6 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-[2rem] border border-[rgba(212,180,131,0.4)] bg-[rgba(255,253,248,0.85)] p-8 md:p-10 shadow-[0_50px_100px_-40px_rgba(47,43,40,0.35)]"
-          style={{ backdropFilter: "blur(18px)" }}
-        >
-          <div className="text-center">
-            <span className="text-eyebrow">Save the Date</span>
-            <div className="divider-ornament mx-auto mt-4" aria-hidden />
-          </div>
-          <ul className="mt-6 divide-y divide-[rgba(212,180,131,0.25)]">
-            {info.map(({ icon: Icon, label, value }) => (
-              <li
-                key={label}
-                className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-4"
-              >
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[color:var(--champagne-soft)] text-[color:var(--charcoal)]">
-                  <Icon className="h-4 w-4" strokeWidth={1.4} />
-                </span>
-                <span className="text-eyebrow truncate">{label}</span>
-                <span className="font-serif text-lg md:text-xl text-[color:var(--charcoal)] text-right truncate">
-                  {value}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
     </section>
   );
 }
