@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Music, VolumeX } from "lucide-react";
 import { weddingConfig } from "@/lib/wedding-config";
+import weddingMusic from "@/assets/wedding-music.mp3.asset.json";
+
+const MUSIC_PREF_KEY = "everafter_music_on";
+const TARGET_VOLUME = 0.25;
 
 const NAV = [
   { label: "Home", href: "#home" },
@@ -17,6 +21,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("#home");
   const [musicOn, setMusicOn] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeRef = useRef<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -43,23 +49,59 @@ export function Header() {
     return () => obs.disconnect();
   }, []);
 
+  // Create the audio element once and preload metadata (no autoplay).
   useEffect(() => {
-    let audio: HTMLAudioElement | null = null;
-    if (musicOn) {
-      audio = new Audio(
-        "https://cdn.pixabay.com/download/audio/2022/03/15/audio_1a2b8f2f1d.mp3?filename=romantic-piano-ambient-110624.mp3"
-      );
-      audio.loop = true;
-      audio.volume = 0.35;
-      audio.play().catch(() => {});
-    }
+    const audio = new Audio(weddingMusic.url);
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.volume = 0;
+    audioRef.current = audio;
+    if (sessionStorage.getItem(MUSIC_PREF_KEY) === "1") setMusicOn(true);
     return () => {
-      if (audio) {
-        audio.pause();
-        audio.src = "";
-      }
+      if (fadeRef.current) window.clearInterval(fadeRef.current);
+      audio.pause();
+      audioRef.current = null;
     };
-  }, [musicOn]);
+  }, []);
+
+  const fadeTo = (target: number, onDone?: () => void) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (fadeRef.current) window.clearInterval(fadeRef.current);
+    const steps = 40;
+    const stepMs = 1000 / steps;
+    const start = audio.volume;
+    const delta = (target - start) / steps;
+    let i = 0;
+    fadeRef.current = window.setInterval(() => {
+      i += 1;
+      const v = i >= steps ? target : start + delta * i;
+      audio.volume = Math.min(1, Math.max(0, v));
+      if (i >= steps) {
+        if (fadeRef.current) window.clearInterval(fadeRef.current);
+        fadeRef.current = null;
+        onDone?.();
+      }
+    }, stepMs);
+  };
+
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (musicOn) {
+      setMusicOn(false);
+      sessionStorage.setItem(MUSIC_PREF_KEY, "0");
+      fadeTo(0, () => audio.pause());
+    } else {
+      setMusicOn(true);
+      sessionStorage.setItem(MUSIC_PREF_KEY, "1");
+      audio.volume = 0;
+      audio
+        .play()
+        .then(() => fadeTo(TARGET_VOLUME))
+        .catch(() => setMusicOn(false));
+    }
+  };
 
   const Monogram = (
     <a href="#home" className="flex flex-col items-start gap-1.5 leading-none">
@@ -137,9 +179,20 @@ export function Header() {
         <div className="flex items-center justify-end gap-3">
           <button
             aria-label={musicOn ? "Pause music" : "Play music"}
-            onClick={() => setMusicOn((v) => !v)}
-            className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(201,165,92,0.4)] bg-[rgba(255,253,248,0.55)] backdrop-blur-md transition-all duration-300 hover:border-[color:var(--gold)] hover:bg-[rgba(255,253,248,0.9)] hover:shadow-[0_0_0_4px_rgba(201,165,92,0.12)]"
+            aria-pressed={musicOn}
+            onClick={toggleMusic}
+            className={`group relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-300 hover:border-[color:var(--gold)] hover:bg-[rgba(255,253,248,0.9)] hover:shadow-[0_0_0_4px_rgba(201,165,92,0.12)] ${
+              musicOn
+                ? "border-[color:var(--gold)] bg-[rgba(255,253,248,0.9)] shadow-[0_0_0_4px_rgba(201,165,92,0.14)]"
+                : "border-[rgba(201,165,92,0.4)] bg-[rgba(255,253,248,0.55)]"
+            }`}
           >
+            {musicOn && (
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{ animation: "softPulse 2.6s ease-in-out infinite" }}
+              />
+            )}
             {musicOn ? (
               <Music className="h-4 w-4 text-[color:var(--gold)]" strokeWidth={1.5} />
             ) : (
