@@ -23,21 +23,21 @@ export function StorySection() {
   const chapters = [
     {
       year: "The Beginning",
-      title: "Two families, one destiny",
+      title: "Two Hearts, One Workplace",
       body:
-        "Introduced by families who had known each other for years, Anil and Susmitha met over quiet chai and long conversations — the kind that turn strangers into a whole future.",
+        "They first met at work, where ordinary conversations gradually turned into genuine friendship. Day by day, shared moments, laughter and understanding brought them closer, until they realized they had found something truly special in each other.",
     },
     {
       year: "The Promise",
-      title: "A quiet yes",
+      title: "A Love Worth Fighting For",
       body:
-        "Under warm evening lamps and the blessings of parents, they exchanged a soft promise — to walk together through every season with grace, patience, and love.",
+        "Their journey was not without challenges. With patience, trust and unwavering faith in their relationship, they sought the blessings of both families. In time, love and understanding brought everyone together, turning hope into acceptance.",
     },
     {
-      year: "Ever After",
-      title: "A celebration to remember",
+      year: "Forever Begins",
+      title: "A New Chapter Together",
       body:
-        "Now, surrounded by the people who shaped them, they invite you to witness the beginning of a life woven from the finest of traditions and the tenderest of dreams.",
+        "With the heartfelt blessings of both families, they now begin a beautiful new chapter together, promising to walk hand in hand through every season of life with love, respect and endless memories.",
     },
   ];
 
