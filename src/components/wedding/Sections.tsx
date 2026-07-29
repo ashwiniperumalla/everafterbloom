@@ -90,19 +90,19 @@ export function CelebrationSection() {
       icon: ScrollText,
       title: "Marriage Registration",
       time: "Thursday, 20 August 2026",
-      body: "The formal beginning — vows witnessed and sealed in the presence of family.",
+      body: "The beginning of our forever, where two hearts became one in the presence of our families.",
     },
     {
       icon: Sparkles,
-      title: "Reception Celebration",
+      title: "Groom's Reception",
       time: "Thursday, 20 August 2026 · Following the Marriage Registration",
-      body: "An evening of blessings, feasting and warm gold light with the ones we love.",
+      body: "An evening of celebration, blessings and joyful moments shared with family and friends.",
     },
     {
       icon: Flower2,
       title: "Bride's Reception",
       time: "Friday, 21 August 2026",
-      body: "A softer, intimate gathering to welcome the bride into her new family.",
+      body: "A heartfelt celebration hosted by the bride's family, bringing loved ones together to honour the newlyweds and celebrate this beautiful new beginning.",
     },
     {
       icon: MapPin,
