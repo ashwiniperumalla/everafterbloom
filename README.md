@@ -1,456 +1,179 @@
 # Ever After Bloom
 
-# PROJECT EVER AFTER
+### Luxury Interactive Wedding Invitation Website
 
-Create a premium luxury interactive wedding website for an Indian couple.
+Ever After Bloom is a premium, responsive digital wedding invitation designed for **Anil & Susmitha**.
 
-This should NOT look like a template.
+The project transforms a traditional wedding invitation into an immersive digital experience, combining editorial-style design, storytelling, elegant animations, responsive layouts, and interactive elements.
 
-It should feel like an award-winning editorial experience that combines luxury, emotion, storytelling, and modern web design.
+The goal was to create a website that feels like a **digital keepsake rather than a traditional invitation template**.
 
-Think of it as a digital keepsake rather than an invitation.
+---
 
---------------------------------------------------
+## ✨ Live Demo
 
-TECH STACK
+**Live Website:**  
+https://ashwiniperumalla.github.io/everafterbloom/
 
---------------------------------------------------
+**Lovable Deployment:**  
+https://everafterbloom.lovable.app
 
-Use:
+---
 
-• React
+## 📌 Project Overview
 
-• Tailwind CSS
+**Project Name:** Ever After Bloom  
+**Type:** Interactive Wedding Invitation Website  
+**Design Style:** Luxury Editorial Botanical  
+**Location:** Mahabubabad, Telangana, India  
+**Status:** Completed & Deployed
 
-• Framer Motion
+The website was designed with a warm, elegant visual language inspired by luxury editorial design and fine-art wedding photography.
 
-• Lucide Icons
+---
 
-Responsive for:
+## 🎨 Design Concept
 
-Desktop
+The visual direction combines:
 
-Tablet
+- Luxury editorial aesthetics
+- Botanical elements
+- Warm ivory and champagne tones
+- Elegant typography
+- Minimal fine-art styling
+- Cinematic transitions
+- Soft animations
+- Generous whitespace
 
-Mobile
+### Color Palette
 
-Use reusable React components throughout.
+- Soft Cream
+- Champagne Gold
+- Muted Sage
+- Deep Charcoal
+- Warm Gray
+- Soft Gold
 
-Create clean, maintainable code.
+The design intentionally avoids harsh black, bright white, and excessive visual effects.
 
---------------------------------------------------
+---
 
-DESIGN LANGUAGE
+## 🚀 Features
 
---------------------------------------------------
+### Opening Experience
 
-Design Style:
+- Cinematic opening animation
+- Interactive invitation reveal
+- Gold wax-seal interaction
+- Smooth transition into the main website
+- Automatic reveal for visitors who do not interact
 
-Luxury Editorial Botanical
+### Hero Section
 
-Inspired by:
+- Full-screen editorial presentation
+- Couple names with elegant typography
+- Wedding invitation messaging
+- Location information
+- Interactive call-to-action buttons
 
-• Apple
+### Our Story
 
-• Vogue Weddings
+A dedicated storytelling section describing the couple's journey from meeting to marriage.
 
-• Dior
+### Celebration
 
-• Minimal Fine Art Wedding Photography
+Dedicated sections for:
 
-The feeling should be:
+- Marriage Registration
+- Groom's Reception
+- Bride's Reception
 
-Elegant
+Wedding details are designed to be easily updated as final information becomes available.
 
-Timeless
+### Gallery
 
-Soft
+- Responsive gallery layout
+- Editorial-style image presentation
+- Elegant placeholders for future wedding photographs
 
-Warm
+### Blessings
 
-Premium
+A dedicated section for wedding wishes and blessings.
 
-Minimal
-
-Never flashy.
-
---------------------------------------------------
-
-COLOR PALETTE
-
---------------------------------------------------
-
-Background
-
-#FAF7F2
-
-Soft Cream
-
-#F4EFE7
-
-Champagne Gold
-
-#D4B483
-
-Muted Sage
-
-#A8B59A
-
-Deep Charcoal
-
-#2F2B28
-
-Warm Gray
-
-#6B655E
-
-Soft Gold
-
-#E7D7B5
-
-Avoid harsh black.
-
-Avoid bright white.
-
---------------------------------------------------
-
-TYPOGRAPHY
-
---------------------------------------------------
-
-Headings
-
-Cormorant Garamond
-
-Names
-
-Great Vibes
-
-Body
-
-Poppins
-
-Large whitespace.
-
-Elegant typography hierarchy.
-
---------------------------------------------------
-
-GLOBAL CONFIGURATION
-
---------------------------------------------------
-
-Create ONE editable configuration object.
-
-const weddingConfig = {
-
-groomName: "Anil",
-
-brideName: "Susmitha",
-
-weddingDate: "Coming Soon",
-
-marriageTime: "Coming Soon",
-
-receptionTime: "Coming Soon",
-
-venueName: "To Be Announced",
-
-city: "Mahabubabad",
-
-address: "Coming Soon",
-
-googleMaps: "",
-
-gallery: [],
-
-music: "",
-
-heroImage: "",
-
-storyImages: []
-
-}
-
-Every section must read values from this configuration object.
-
-Do NOT hardcode dates or venue details.
-
---------------------------------------------------
-
-BACKGROUND SYSTEM
-
---------------------------------------------------
-
-Do NOT use a plain background.
-
-Create layered depth.
-
-Layer 1
-
-Warm ivory paper texture.
-
-Layer 2
-
-Soft silk texture.
-
-Layer 3
-
-Very subtle botanical illustrations.
-
-Layer 4
-
-Gentle floating golden particles.
-
-Everything must remain elegant and understated.
-
---------------------------------------------------
-
-HEADER
-
---------------------------------------------------
-
-Transparent at the top.
-
-Turns into a soft ivory glass navigation after scrolling.
-
-Navigation:
-
-Home
-
-Our Story
-
-Celebration
-
-Gallery
-
-Blessings
-
-Contact
-
-Desktop:
-
-Centered navigation.
-
-Mobile:
-
-Elegant hamburger menu with smooth animation.
-
---------------------------------------------------
-
-OPENING EXPERIENCE
-
---------------------------------------------------
-
-This is the signature feature.
-
-Do NOT immediately show the website.
-
-Instead:
-
-Fade in from white.
-
-Slowly reveal a luxurious floral corridor.
-
-Warm morning sunlight.
-
-Soft atmosphere.
-
-Very gentle floating particles.
-
-Display this quote:
-
-"Every love story is beautiful, but ours is our favorite."
-
-After two seconds...
-
-A circular gold wax seal appears.
-
-Text:
-
-Break the Seal
-
-When clicked:
-
-The seal gently cracks.
-
-Soft golden particles appear.
-
-Bride and Groom names are revealed elegantly.
-
-A button appears:
-
-Begin the Journey
-
-If the visitor does nothing, automatically reveal everything after five seconds.
-
-The experience must feel smooth and luxurious.
-
-Never childish.
-
---------------------------------------------------
-
-HERO SECTION
-
---------------------------------------------------
-
-After the opening...
-
-Display a full-screen editorial hero section.
-
-Large elegant couple portrait placeholder.
-
-Use a graceful image container with rounded corners and soft shadows.
-
-Large typography:
-
-Anil
-
-♡
-
-Susmitha
-
-Subtitle:
-
-A celebration of love, family, and forever.
-
-Use editable values from weddingConfig.
-
-Display a premium information card below:
-
-📅 Wedding Date
-
-Coming Soon
-
-🕙 Register Marriage
-
-Coming Soon
-
-🎉 Reception
-
-Coming Soon
-
-📍 Location
-
-Mahabubabad, Telangana
-
-🏛 Venue
-
-To Be Announced
-
-Use elegant cards with soft borders and subtle hover effects.
-
---------------------------------------------------
-
-BUTTON STYLE
-
---------------------------------------------------
-
-Primary
-
-Champagne Gold
-
-Rounded pill
-
-Soft shadow
-
-Secondary
-
-Ivory outline
-
-Hover:
-
-Lift 3px
-
-Very smooth animation
-
---------------------------------------------------
-
-ANIMATIONS
-
---------------------------------------------------
-
-Use Framer Motion.
-
-No bouncing.
-
-No spinning.
-
-Use:
-
-Fade
-
-Slide
-
-Scale
-
-Float
-
-Parallax
-
-Reveal
-
-Everything should feel calm and cinematic.
-
---------------------------------------------------
-
-RESPONSIVE
-
---------------------------------------------------
-
-Desktop first.
-
-Tablet optimized.
-
-Mobile should feel premium, not compressed.
-
-Spacing must remain luxurious.
-
---------------------------------------------------
-
-CODE QUALITY
-
---------------------------------------------------
-
-Use reusable components.
-
-Separate sections cleanly.
-
-Keep code organized.
-
-Do not generate placeholder lorem ipsum.
-
-Use meaningful placeholder wedding text.
-
---------------------------------------------------
-
-FINAL GOAL
-
---------------------------------------------------
-
-The homepage should feel like a luxury wedding editorial website worthy of an award.
-
-Visitors should immediately feel emotion, elegance, and anticipation.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://everafterbloom.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/431eaa3e-b977-47a5-9985-1f2e4a5cb0b2).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+### Contact
+
+A simple section for invitation/contact information.
+
+### Music
+
+- Interactive music control
+- Background wedding music
+- User-controlled playback
+
+### Responsive Design
+
+Optimized for:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+---
+
+## 🛠️ Tech Stack
+
+- React
+- TypeScript
+- TanStack Start
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide Icons
+- GitHub Actions
+- GitHub Pages
+
+---
+
+## 🧩 Project Structure
+
+```text
+everafterbloom/
+│
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+│
+├── public/
+│   └── static assets
+│
+├── src/
+│   ├── components/
+│   ├── routes/
+│   ├── styles/
+│   └── server.ts
+│
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+└── README.md
+
+## ⚙️ Running the Project Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ashwiniperumalla/everafterbloom.git
+```
+### 2. Open the project
+``` bash
+cd everafterbloom
+```
+### 3. Install dependencies
+``` bash
+npm install
+```
+### 4. Start the development server
+``` bash
 npm run dev
 ```
