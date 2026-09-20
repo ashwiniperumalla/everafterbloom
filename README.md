@@ -123,7 +123,19 @@ Optimized for:
 - Mobile
 
 ---
+## ✨ Key Highlights
 
+- Cinematic wedding invitation opening experience
+- Interactive gold wax-seal invitation reveal
+- Smooth Framer Motion animations and transitions
+- Editorial-style responsive wedding layout
+- Reusable React and TypeScript components
+- Responsive navigation for desktop, tablet, and mobile
+- Interactive background music control
+- Elegant botanical and luxury editorial visual system
+- GitHub Actions CI/CD deployment
+- GitHub Pages hosting
+  
 ## 🛠️ Tech Stack
 
 - React
