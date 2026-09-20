@@ -19,6 +19,9 @@ https://ashwiniperumalla.github.io/everafterbloom/
 https://everafterbloom.lovable.app
 
 ---
+## 📸 Preview
+
+![Ever After Bloom](./homepage.png)
 
 ## 📌 Project Overview
 
